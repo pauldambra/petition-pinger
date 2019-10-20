@@ -1,57 +1,89 @@
 var _ = window._
 
-window.Handlebars.registerHelper('newEntry', function () {
-  return new window.Handlebars.SafeString(this.lastPosition === -1 ? 'class="new-entry"' : '')
-})
+//ugh IE
+if (window.Element && !Element.prototype.closest) {
+  Element.prototype.closest =
+  function(s) {
+    var matches = (this.document || this.ownerDocument).querySelectorAll(s),
+        i,
+        el = this;
+    do {
+      i = matches.length;
+      while (--i >= 0 && matches.item(i) !== el) {};
+    } while ((i < 0) && (el = el.parentElement));
+    return el;
+  };
+}
 
-window.Handlebars.registerHelper('movement', function () {
-  var change = this.position - this.lastPosition
+const calculateMovement = x => {
 
-  var r = 'class="steady"'
-  if (change > 0) {
-    console.log(this, 'moving up')
-    r = 'class="moving-up"'
+      var change = x.position - x.lastPosition
+
+      var movement = 'steady'
+      if (change > 0) {
+        movement = 'moving-up'
+      }
+
+      if (change < 0) {
+        movement = 'moving-down'
+      }
+
+      return movement
+}
+
+const toggleHighlight = (state) => {
+  return (event, leader) => {
+    var constituency = window.constituencies.find(leader.name)
+    constituency && constituency.classList[state]('highlight')
+
+    const row = event.srcElement.closest('tr')
+    row.classList[state]('highlight')
   }
+}
 
-  if (change < 0) {
-    console.log(this, 'moving down')
-    r = 'class="moving-down"'
+const leaderBoardView = new Vue({
+  el: '#votes',
+  data: {
+    leaders: []
+  },
+  methods: {
+    mouseOver: toggleHighlight('add'),
+    mouseLeave: toggleHighlight('remove')
   }
-
-  return new window.Handlebars.SafeString(r)
 })
-
-var leaderboardSource = document.getElementById('leaderboard-template').innerHTML
-var leaderboardTemplate = window.Handlebars.compile(leaderboardSource)
-var votes = document.getElementById('votes')
 
 var lastLeaders = null
 
 function update (data) {
   var leaders = _.chain(data)
     .orderBy('signature_count', 'desc')
+    .take(20)
     .map(function (x, index) {
       return {
         name: x.name,
-        signature_count: x.signature_count,
+        signatureCount: x.signature_count,
         position: index
       }
     })
     .map(function (x) {
-      if (!lastLeaders) return x
-
-      var lastTime = _.findIndex(lastLeaders, { name: x.name })
-      x.lastPosition = lastTime
+      if (lastLeaders) {
+        x.lastPosition = _.findIndex(lastLeaders, { name: x.name })
+        x.isNewEntry = x.lastPosition === -1
+      }
 
       return x
     })
-    .take(20)
+    .map(function (x) {
+      if (lastLeaders) {
+        x.movement = calculateMovement(x)
+      }
+      return x
+    })
     .value()
 
   lastLeaders = leaders
-  votes.innerHTML = leaderboardTemplate({leaders: leaders})
 
-  window.hoverActions.init()
+  leaderBoardView.leaders = leaders
 }
 
 window.petitionPinger.signatures$.subscribe(update)

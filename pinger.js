@@ -8,15 +8,13 @@ var showItIsBroken = function (err) {
 
 function getData () {
   return window.Rx.Observable.ajax({
-    url: window.petitionPinger.url,
+    url: window.petitionPinger.petitionChooser.petitionUrl,
     crossDomain: true
   }).catch(function (err) {
     showItIsBroken(err)
     return window.Rx.Observable.of({data: {}})
   })
 }
-
-window.petitionPinger = window.petitionPinger || {}
 
 window.petitionPinger.responses$ = Rx.Observable
   .timer(500, 1500)

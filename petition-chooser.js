@@ -1,46 +1,40 @@
+const defaultUrl = 'https://petition.parliament.uk/petitions/269157.json'
 
-const getParameterByName = (queryParam) => {
+const getPetitionFromURL = () => {
+  let needle = "petition"
   if (URLSearchParams) {
     const urlParams = new URLSearchParams(window.location.search)
-    return urlParams.get(queryParam)
+    return urlParams.get(needle) || defaultUrl
   } else {
     const url = window.location.href
-    queryParam = queryParam.replace(/[\[\]]/g, '\\$&')
-    const regex = new RegExp('[?&]' + queryParam + '(=([^&#]*)|&|#|$)')
+    needle = needle.replace(/[\[\]]/g, '\\$&')
+    const regex = new RegExp('[?&]' + needle + '(=([^&#]*)|&|#|$)')
     const results = regex.exec(url)
     return !results || !results[2]
-      ? ''
+      ? defaultUrl
       : decodeURIComponent(results[2].replace(/\+/g, ' '))
   }
 }
 
-window.Rx.Observable.ajax({
-  url: 'https://petition.parliament.uk/petitions.json?state=open',
-  crossDomain: true
+window.petitionPinger.petitionChooser = new Vue({
+  el: '#petition-chooser',
+  data: {
+    petitions: [],
+    petitionUrl: getPetitionFromURL()
+  },
+  created: function() {
+
+    fetch('https://petition.parliament.uk/petitions.json?state=open')
+    .then(res => res.json())
+    .then(res => {
+      this.petitions = res.data
+        .map(p => {
+          return {
+            url: p.links.self,
+            description: `${p.attributes.action} : ${p.attributes.signature_count} signatures`
+          }
+        })
+    })
+  }
 })
-  .flatMap(function (r) { return r.response.data })
-  .take(50)
-  .subscribe(function (d) {
-    var list = document.getElementById('popular-petitions')
-    var optionNode = document.createElement('option')
-    optionNode.value = d.links.self
-    optionNode.appendChild(document.createTextNode(`${d.attributes.action} : ${d.attributes.signature_count} signatures`))
-    list.appendChild(optionNode)
-  })
 
-var petitionInput = document.getElementById('petition')
-const fromQueryParam = getParameterByName('petition')
-let url
-if (fromQueryParam) {
-  url = fromQueryParam
-  petitionInput.value = fromQueryParam
-} else {
-  url = petitionInput.value
-}
-
-window.Rx.Observable.fromEvent(petitionInput, 'keyup')
-  .startWith(url)
-  .debounceTime(500)
-  .subscribe(function (t) {
-    window.petitionPinger.url = petitionInput.value
-  })
