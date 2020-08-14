@@ -1,172 +1,201 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Petition Pinger</title>
-<!--   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js" integrity="sha256-ufGElb3TnOtzl5E4c/qQnZFGP+FYEZj5kbSEdJNrw0A=" crossorigin="anonymous"></script> -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js" integrity="sha256-chlNFSVx3TdcQ2Xlw7SvnbLAavAQLO0Y/LBiWX04viY=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.4.4/d3.min.js" integrity="sha256-V28Aoqm/QLxBnkLyoarf0+wZtgxDAu7mJ9KcBYvTBnI=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.0.1/Rx.min.js" integrity="sha256-TeWVfZ29ZE2tO8al/1wPR2TAOWZ1GRXbZ90H5p/dNMY=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js" integrity="sha256-8E6QUcFg1KTnpEU8TFGhpTGHw5fJqB9vCms3OhAYLqw=" crossorigin="anonymous"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Petition Pinger</title>
+    <!--   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js" integrity="sha256-ufGElb3TnOtzl5E4c/qQnZFGP+FYEZj5kbSEdJNrw0A=" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"
+            integrity="sha256-chlNFSVx3TdcQ2Xlw7SvnbLAavAQLO0Y/LBiWX04viY=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.4.4/d3.min.js"
+            integrity="sha256-V28Aoqm/QLxBnkLyoarf0+wZtgxDAu7mJ9KcBYvTBnI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.0.1/Rx.min.js"
+            integrity="sha256-TeWVfZ29ZE2tO8al/1wPR2TAOWZ1GRXbZ90H5p/dNMY=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"
+            integrity="sha256-8E6QUcFg1KTnpEU8TFGhpTGHw5fJqB9vCms3OhAYLqw=" crossorigin="anonymous"></script>
 
-  <style>
-    path.constituency {
-      transition: fill 3s ease;
-    }
-    #main {
-      display: -ms-flex;
-      display: -webkit-flex;
-      display: flex;
-      height:600px;
-    }
-    #outlet {
-      min-width: 400px;
-      height: 600px;
-      width: 32%;
-    }
-    #outlet svg {
-      margin:auto;
-      display:block;
-    }
-    #votes {
-      min-width:200px;
-      width:67%;
-      height:600px;
-    }
-    table {
-      width:450;
-      border-collapse: collapse;
-    }
-    td, th {
-      border: 1px solid #999;
-      padding: 5px;
-      text-align: left;
-    }
-    .new-entry {
-      background-color: green;
-    }
-    .moving-up:after {
-      content: ' \2191 ';
-      color:green;
-    }
-    .moving-down:after {
-      content: ' \2193 ';
-      color:red;
-    }
-    .steady:after {
-      content: ' \2194 ';
-    }
-    .highlight {
-      transition: none !important;
-      fill:green !important;
-      background-color: rgba(0,128,0,0.3);
-    }
-    .constituency-name {
-      cursor: pointer;
-    }
-    #flash {
-      color:red;
-      font-size: xx-large;
-      font-weight: bold;
-    }
-    #petition {
-      width: 350px;
-    }
-    input {
-      border: 1px solid grey;
-      padding-left: 5px;
-    }
-  </style>
+    <style>
+        path.constituency {
+            transition: fill 3s ease;
+        }
+
+        #main {
+            display: -ms-flex;
+            display: -webkit-flex;
+            display: flex;
+            height: 600px;
+        }
+
+        #outlet {
+            min-width: 400px;
+            height: 600px;
+            width: 32%;
+        }
+
+        #outlet svg {
+            margin: auto;
+            display: block;
+        }
+
+        #votes {
+            min-width: 200px;
+            width: 67%;
+            height: 600px;
+        }
+
+        table {
+            width: 450;
+            border-collapse: collapse;
+        }
+
+        td, th {
+            border: 1px solid #999;
+            padding: 5px;
+            text-align: left;
+        }
+
+        .new-entry {
+            background-color: green;
+        }
+
+        .moving-up:after {
+            content: ' \2191 ';
+            color: green;
+        }
+
+        .moving-down:after {
+            content: ' \2193 ';
+            color: red;
+        }
+
+        .steady:after {
+            content: ' \2194 ';
+        }
+
+        .highlight {
+            transition: none !important;
+            fill: green !important;
+            background-color: rgba(0, 128, 0, 0.3);
+        }
+
+        .constituency-name {
+            cursor: pointer;
+        }
+
+        #flash {
+            color: red;
+            font-size: xx-large;
+            font-weight: bold;
+        }
+
+        #petition {
+            width: 350px;
+        }
+
+        input {
+            border: 1px solid grey;
+            padding-left: 5px;
+        }
+    </style>
 </head>
 <body>
 
 <h1>Petition Pinger</h1>
 <p>
-Back in 2017 I was amazed at how quickly <a href="https://petition.parliament.uk/petitions/171928" target="_blank">this petition</a> was being signed and noticed that the data is <a href="https://petition.parliament.uk/petitions/171928.json" target="_blank">published as JSON</a> so decided to see where the votes were coming from. 
-<br/> <a href="https://github.com/pauldambra/petition-pinger">(fork me on github)</a>
+    Back in 2017 I was amazed at how quickly <a href="https://petition.parliament.uk/petitions/171928" target="_blank">this
+    petition</a> was being signed and noticed that the data is <a
+        href="https://petition.parliament.uk/petitions/171928.json" target="_blank">published as JSON</a> so decided to
+    see where the votes were coming from.
+    <br/> <a href="https://github.com/pauldambra/petition-pinger">(fork me on github)</a>
 </p>
 <p>
-You can share a pinger that starts on a particular URL like this: <a href="https://pauldambra.dev/petition-pinger/?petition=https://petition.parliament.uk/archived/petitions/171928.json" target="_blank">https://pauldambra.dev/petition-pinger/?petition=https://petition.parliament.uk/archived/petitions/171928.json</a>
+    You can share a pinger that starts on a particular URL like this: <a
+        href="https://pauldambra.dev/petition-pinger/?petition=https://petition.parliament.uk/archived/petitions/171928.json"
+        target="_blank">https://pauldambra.dev/petition-pinger/?petition=https://petition.parliament.uk/archived/petitions/171928.json</a>
 </p>
 <p>
-  <p>
-      <p id="now-tracking-outlet">
+<p>
+<p id="now-tracking-outlet">
     Now tracking <a :href="url">{{name}}</a> with {{signatureCount}} signatures
-      <p>
-    <div id="petition-chooser">
-      <label for="petition">Choose a petition:</label>
-      <input id="petition" list="popular-petitions" v-model="petitionUrl"/>
-      <datalist id="popular-petitions">
-        <option 
-          v-for="petition in petitions"
-          :value="petition.url"
-        >
-          {{petition.description}}
-        </option>
-      </datalist>
-    </div>
-  </p>
-  <div id="flash"></div>
 <p>
-  Constituencies flash yellow when at least one new signature is received from them.
-</p><p>  Once the leaderboard loads you can hover over constituencies to see where they are.
+<div id="petition-chooser">
+    <label for="petition">Choose a petition:</label>
+    <input id="petition" list="popular-petitions" v-model="petitionUrl"/>
+    <datalist id="popular-petitions">
+        <option
+                v-for="petition in petitions"
+                :value="petition.url"
+        >
+            {{petition.description}}
+        </option>
+    </datalist>
+</div>
+</p>
+<div id="flash"></div>
+<p>
+    Constituencies flash yellow when at least one new signature is received from them.
+</p>
+<p> Once the leaderboard loads you can hover over constituencies to see where they are.
 </p>
 <div id="main">
 
-  <div id="outlet">
-    <svg></svg>
-  </div>
-  <div id="votes">
-      <h1>
-    Top 20 Constituencies by Votes
-  </h1>
-  <table>
-      <thead>
-          <th>Constituency</th>
-          <th>Votes</th>
-      </thead>
-      <tbody>
-          <tr 
-            v-for="leader in leaders"
-            v-bind:key="leader.name"
-            :class="leader.isNewEntry && 'new-entry'"
-            v-on:mouseover.stop="mouseOver($event, leader)"
-            v-on:mouseleave.stop="mouseLeave($event, leader)"
+    <div id="outlet">
+        <svg></svg>
+    </div>
+    <div id="votes">
+        <h1>
+            Constituencies by Votes
+        </h1>
+        <div class="pagination">
+            <button @click="prevPage">Previous</button>
+            <button @click="nextPage" style="float: right">Next</button>
+        </div>
+        <table>
+            <thead>
+            <th>Constituency</th>
+            <th>Votes</th>
+            </thead>
+            <tbody>
+            <tr
+                    v-for="leader in leaderboardPage"
+                    v-bind:key="leader.name"
+                    :class="leader.isNewEntry && 'new-entry'"
+                    v-on:mouseover.stop="mouseOver($event, leader)"
+                    v-on:mouseleave.stop="mouseLeave($event, leader)"
             >
-              <td class="constituency-name">
-                  {{ leader.name }}
-              </td>
-              <td>
+                <td class="constituency-name">
+                    {{ leader.name }}
+                </td>
+                <td>
                 <span
-                  :class="leader.movement"
-                  :data-position="leader.position"
-                  :data-last-position="leader.lastPosition"
+                        :class="leader.movement"
+                        :data-position="leader.position"
+                        :data-last-position="leader.lastPosition"
                 >
                   {{ leader.signatureCount }}
                 </span>
-              </td>
-          </tr>
-      </tbody>
-  </table>
-  </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
-  <script type="text/javascript">
+<script type="text/javascript">
     window.petitionPinger = window.petitionPinger || {}
-  </script>
+</script>
 
-  <script src="constituencies.js" charset="utf-8"></script>
-  <script src="uk.electionmap.d3.js" charset="utf-8"></script>
-  <script src="map.js" charset="utf-8"></script>
+<script src="constituencies.js" charset="utf-8"></script>
+<script src="uk.electionmap.d3.js" charset="utf-8"></script>
+<script src="map.js" charset="utf-8"></script>
 
-  <script src="petition-chooser.js" charset="utf-8"></script>
-  
-  <script src="pinger.js" charset="utf-8"></script>
+<script src="petition-chooser.js" charset="utf-8"></script>
 
-  <script src="flash-on-sign.js" charset="utf-8"></script>
-  <script src="leaderboard.js" charset="utf-8"></script>
-  <script src="update-now-tracking.js" charset="utf-8"></script>
+<script src="pinger.js" charset="utf-8"></script>
+
+<script src="flash-on-sign.js" charset="utf-8"></script>
+<script src="leaderboard.js" charset="utf-8"></script>
+<script src="update-now-tracking.js" charset="utf-8"></script>
 
 </body>
 </html>
