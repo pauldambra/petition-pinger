@@ -44,7 +44,6 @@
         }
 
         table {
-            width: 450;
             border-collapse: collapse;
         }
 
@@ -142,7 +141,7 @@
     <div id="outlet">
         <svg></svg>
     </div>
-    <div id="votes">
+    <div id="votes" style="max-width: 560px">
         <h1>
             Constituencies by Votes
         </h1>
@@ -150,7 +149,7 @@
             <button @click="prevPage">Previous</button>
             <button @click="nextPage" style="float: right">Next</button>
         </div>
-        <table>
+        <table width="100%">
             <thead>
             <th>Constituency</th>
             <th>Votes</th>
