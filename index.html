@@ -108,9 +108,13 @@
     <br/> <a href="https://github.com/pauldambra/petition-pinger">(fork me on github)</a>
 </p>
 <p>
-    You can share a pinger that starts on a particular URL like this: <a
-        href="https://pauldambra.dev/petition-pinger/?petition=https://petition.parliament.uk/archived/petitions/171928.json"
-        target="_blank">https://pauldambra.dev/petition-pinger/?petition=https://petition.parliament.uk/archived/petitions/171928.json</a>
+    You can share a pinger that starts on a particular URL by adding its json petition url to a query parameter called "petition"...
+</p>
+<p>
+    Or a pinger that starts pre-filtered to search for constituencies by adding the search string to a query parameter called "filter"...
+</p><p>like this: <a
+        href="https://pauldambra.dev/petition-pinger/?filter=stockport&petition=https://petition.parliament.uk/archived/petitions/171928.json"
+        target="_blank">https://pauldambra.dev/petition-pinger/?filter=stockport&petition=https://petition.parliament.uk/archived/petitions/171928.json</a>
 </p>
 <p>
 <p>
@@ -148,10 +152,11 @@
         <div class="pagination" style="text-align: center">
             <button style="float: left" @click="prevPage"> &#8592; Previous</button>
             <span>page {{currentPage}} of {{totalPages}}</span>
-            <button style="float: right" @click="nextPage">Next &#8594; </button>
+            <button style="float: right" @click="nextPage">Next &#8594;</button>
         </div>
         <div>
-            <input v-model="constituencyFilter" placeholder="filter" style="width: 98%;margin:1% 0;height: 2em;line-height: 2em"/>
+            <input v-model="constituencyFilter" placeholder="filter"
+                   style="width: 98%;margin:1% 0;height: 2em;line-height: 2em"/>
         </div>
         <table width="100%">
             <thead>
@@ -184,10 +189,12 @@
     </div>
 </div>
 
+
 <script type="text/javascript">
     window.petitionPinger = window.petitionPinger || {}
 </script>
 
+<script src="query-params.js" charset="utf-8"></script>
 <script src="constituencies.js" charset="utf-8"></script>
 <script src="uk.electionmap.d3.js" charset="utf-8"></script>
 <script src="map.js" charset="utf-8"></script>
