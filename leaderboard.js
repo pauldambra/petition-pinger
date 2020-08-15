@@ -45,6 +45,9 @@ const leaderBoardView = new Vue({
             const firstItem = (this.currentPage - 1) * this.pageSize
             const lastItem = this.currentPage * this.pageSize
             return this.leaders.slice(firstItem, lastItem);
+        },
+        totalPages: function () {
+            return Math.ceil(this.leaders.length / this.pageSize)
         }
     }
 })
