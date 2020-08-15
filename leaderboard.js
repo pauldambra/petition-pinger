@@ -28,26 +28,30 @@ const leaderBoardView = new Vue({
     data: {
         leaders: [],
         pageSize: 10,
-        currentPage: 1
+        currentPage: 1,
+        constituencyFilter: ''
     },
     methods: {
         mouseOver: toggleHighlight('add'),
         mouseLeave: toggleHighlight('remove'),
         nextPage: function () {
-            if ((this.currentPage * this.pageSize) < this.leaders.length) this.currentPage++;
+            if ((this.currentPage * this.pageSize) < this.filteredLeaders.length) this.currentPage++;
         },
         prevPage: function () {
             if (this.currentPage > 1) this.currentPage--;
         }
     },
     computed: {
+        filteredLeaders: function() {
+          return this.leaders.filter(l => l.name.toLowerCase().indexOf(this.constituencyFilter) >= 0)
+        },
         leaderboardPage: function () {
             const firstItem = (this.currentPage - 1) * this.pageSize
             const lastItem = this.currentPage * this.pageSize
-            return this.leaders.slice(firstItem, lastItem);
+            return this.filteredLeaders.slice(firstItem, lastItem);
         },
         totalPages: function () {
-            return Math.ceil(this.leaders.length / this.pageSize)
+            return Math.ceil(this.filteredLeaders.length / this.pageSize)
         }
     }
 })

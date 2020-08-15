@@ -150,6 +150,9 @@
             <span>page {{currentPage}} of {{totalPages}}</span>
             <button style="float: right" @click="nextPage">Next &#8594; </button>
         </div>
+        <div>
+            <input v-model="constituencyFilter" placeholder="filter" style="width: 98%;margin:1% 0;height: 2em;line-height: 2em"/>
+        </div>
         <table width="100%">
             <thead>
             <th>Constituency</th>
