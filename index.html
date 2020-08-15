@@ -107,22 +107,8 @@
     see where the votes were coming from.
     <br/> <a href="https://github.com/pauldambra/petition-pinger">(fork me on github)</a>
 </p>
-<p>
-    You can share a pinger that starts on a particular URL by adding its json petition url to a query parameter called "petition"...
-</p>
-<p>
-    Or a pinger that starts pre-filtered to search for constituencies by adding the search string to a query parameter called "filter"...
-</p><p>like this: <a
-        href="https://pauldambra.dev/petition-pinger/?filter=stockport&petition=https://petition.parliament.uk/archived/petitions/171928.json"
-        target="_blank">https://pauldambra.dev/petition-pinger/?filter=stockport&petition=https://petition.parliament.uk/archived/petitions/171928.json</a>
-</p>
-<p>
-<p>
-<p id="now-tracking-outlet">
-    Now tracking <a :href="url">{{name}}</a> with {{signatureCount}} signatures <a :href="url">go sign it if you haven't!</a>
-<p>
 <div id="petition-chooser">
-    <label for="petition">Choose a petition:</label>
+    <h2><label for="petition">Choose a petition:</label></h2>
     <input id="petition" list="popular-petitions" v-model="petitionUrl"/>
     <datalist id="popular-petitions">
         <option
@@ -133,13 +119,12 @@
         </option>
     </datalist>
 </div>
+
+<p id="now-tracking-outlet">
+    Currently tracking <a :href="url">{{name}}</a> with {{signatureCount}} signatures <a :href="url">go sign it if you haven't!</a>
+<p>
 </p>
 <div id="flash"></div>
-<p>
-    Constituencies flash yellow when at least one new signature is received from them.
-</p>
-<p> Once the leaderboard loads you can hover over constituencies to see where they are.
-</p>
 <div id="main">
 
     <div id="outlet">
@@ -188,7 +173,20 @@
         </table>
     </div>
 </div>
-
+<h2>How does it work</h2>
+<p>
+    Choose a petition and the site starts checking it for new signatures. "pinging it". Constituencies flash yellow when at least one new signature is received from them. Once the leaderboard loads you can hover over constituencies to see where they are.
+</p>
+<h2>Sharing</h2>
+<p>
+    You can share a pinger that starts on a particular URL by adding its json petition url to a query parameter called "petition"...
+</p>
+<p>
+    Or a pinger that starts pre-filtered to search for constituencies by adding the search string to a query parameter called "filter"...
+</p><p>like this: <a
+        href="https://pauldambra.dev/petition-pinger/?filter=stockport&petition=https://petition.parliament.uk/archived/petitions/171928.json"
+        target="_blank">https://pauldambra.dev/petition-pinger/?filter=stockport&petition=https://petition.parliament.uk/archived/petitions/171928.json</a>
+</p>
 
 <script type="text/javascript">
     window.petitionPinger = window.petitionPinger || {}
