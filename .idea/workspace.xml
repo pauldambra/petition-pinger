@@ -20,11 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b258b9c-9e48-4be3-be10-f83bf1aa9f9f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/query-params.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leaderboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/leaderboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petition-chooser.js" beforeDir="false" afterPath="$PROJECT_DIR$/petition-chooser.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +63,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1597420151229</updated>
-      <workItem from="1597420152379" duration="5770000" />
+      <workItem from="1597420152379" duration="5878000" />
     </task>
     <servers />
   </component>
