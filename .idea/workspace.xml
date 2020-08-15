@@ -22,6 +22,7 @@
     <list default="true" id="5b258b9c-9e48-4be3-be10-f83bf1aa9f9f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/update-now-tracking.js" beforeDir="false" afterPath="$PROJECT_DIR$/update-now-tracking.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +64,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1597420151229</updated>
-      <workItem from="1597420152379" duration="6260000" />
+      <workItem from="1597420152379" duration="6728000" />
     </task>
     <servers />
   </component>
@@ -87,11 +88,11 @@
     </state>
     <state x="360" y="222" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1597421716377" />
     <state x="360" y="240" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1792.1097@0.23.1792.1097" timestamp="1597508082015" />
-    <state width="500" height="436" key="SwitcherDM" timestamp="1597515831653">
+    <state width="500" height="436" key="SwitcherDM" timestamp="1597520990192">
       <screen x="0" y="23" width="1792" height="1097" />
     </state>
     <state width="500" height="445" key="SwitcherDM/0.0.1792.1120@0.0.1792.1120" timestamp="1597421941339" />
-    <state width="500" height="436" key="SwitcherDM/0.23.1792.1097@0.23.1792.1097" timestamp="1597515831653" />
+    <state width="500" height="436" key="SwitcherDM/0.23.1792.1097@0.23.1792.1097" timestamp="1597520990192" />
     <state x="519" y="189" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1597516026366">
       <screen x="0" y="23" width="1792" height="1097" />
     </state>

@@ -5,7 +5,12 @@ const nowTrackingView = new Vue({
     url:'',
     name:'',
     signatureCount:''
-  }
+  },
+    computed: {
+      humanUrl: function () {
+          return this.url.replace(/\.json$/, '')
+      }
+    }
 })
 
 const hasResponse = r => r && r.data && r.data.attributes
