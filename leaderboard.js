@@ -29,7 +29,7 @@ const leaderBoardView = new Vue({
         leaders: [],
         pageSize: 10,
         currentPage: 1,
-        constituencyFilter: window.petitionPinger.getPetitionFromURL('filter') || ''
+        constituencyFilter: window.petitionPinger.getValueFromURL('filter') || ''
     },
     methods: {
         mouseOver: toggleHighlight('add'),

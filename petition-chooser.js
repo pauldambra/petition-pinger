@@ -3,7 +3,7 @@ window.petitionPinger.petitionChooser = new Vue({
   el: '#petition-chooser',
   data: {
     petitions: [],
-    petitionUrl: window.petitionPinger.getPetitionFromURL('petition')
+    petitionUrl: window.petitionPinger.getValueFromURL('petition')
   },
   created: function() {
     fetch('https://petition.parliament.uk/petitions.json?state=open')
