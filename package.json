@@ -18,6 +18,6 @@
   "homepage": "https://github.com/pauldambra/petition-pinger#readme",
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^8.1.1"
+    "mocha": "^8.4.0"
   }
 }
